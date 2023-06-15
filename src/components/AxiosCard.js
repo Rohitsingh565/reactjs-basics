@@ -11,6 +11,8 @@ const StyledContainer = styled.div`
 `
 const Title = styled.h2`
   color: #fff;
+  white-space:nowrap;
+  overflow: hidden;
   font-weight: 300;
   @media (max-width: 500px) {
     font-size: 1rem;
@@ -20,34 +22,22 @@ const Role = styled.div`
   color: #ccc;
   font-weight: 300;
   margin: 6px 0;
+  maxLength
   @media (max-width: 500px) {
     font-size: 0.8rem;
   }
 `
-const Description = styled.p`
-  color: #fff;
-  font-weight: 300;
-  @media (max-width: 500px) {
-    font-size: 0.75rem;
-  }
-`
 
-const Card = ({
+const AxiosCard = ({
   title,
-  role,
-  description,
-  imageURL
+  id,
 }) => (
-  <div className='teamCardStyle' style={{width:'600px', height:'300px', marginTop:'50px', marginLeft:'30px'}}>
+  <div className='teamCardStyle' style={{width:'600px', height:'120px', marginTop:'20px', marginLeft:'110px'}}>
   <StyledContainer>
     <div style={{display:'flex'}}>
     <div>
-    <img style={{borderRadius:"50%", margin:"20px"}} width={150} height={150} src={imageURL} />
-    </div>
-    <div>
     <Title>{title}</Title>
-    <Role>{role}</Role>
-    <Description>{description}</Description>
+    <Role>{id}</Role>
 
     </div>
     </div>
@@ -55,4 +45,4 @@ const Card = ({
 
   </div>
 )
-export default Card
+export default AxiosCard

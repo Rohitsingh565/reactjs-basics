@@ -3,6 +3,8 @@ import Allroutes from './router/AllRoutes'
 import { loadFull } from "tsparticles";
 import { useCallback } from "react";
 import Particles from "react-particles";
+import store from './redux/Store';
+import { Provider } from 'react-redux';
 
 
 function App() {
@@ -72,10 +74,14 @@ function App() {
     await loadFull(engine);
   }, []);
   return (
+    <Provider store={store}>
+
     <div style={{backgroundColor:"black"}}>
        <Particles options={options} init={particlesInit} />
     <Allroutes/>
     </div>
+    </Provider>
+
   );
 }
 

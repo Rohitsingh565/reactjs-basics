@@ -32,22 +32,20 @@ const Description = styled.p`
   }
 `
 
-const Card = ({
-  title,
-  role,
-  description,
-  imageURL
+const NewUserCard = ({
+  name,
+  email,
 }) => (
   <div className='teamCardStyle' style={{width:'600px', height:'300px', marginTop:'50px', marginLeft:'30px'}}>
   <StyledContainer>
     <div style={{display:'flex'}}>
-    <div>
+    {/* <div>
     <img style={{borderRadius:"50%", margin:"20px"}} width={150} height={150} src={imageURL} />
-    </div>
+    </div> */}
     <div>
-    <Title>{title}</Title>
-    <Role>{role}</Role>
-    <Description>{description}</Description>
+    <Title>{name}</Title>
+    <Role>{email}</Role>
+    {/* <Description>{description}</Description> */}
 
     </div>
     </div>
@@ -55,4 +53,4 @@ const Card = ({
 
   </div>
 )
-export default Card
+export default NewUserCard

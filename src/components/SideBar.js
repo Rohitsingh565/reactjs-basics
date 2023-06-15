@@ -9,8 +9,10 @@ import {
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
 import SideBarcss from '../components/SideBar.css'
+import { connect } from 'react-redux';
 
-const SideBar = () => {
+
+const SideBar = ({user}) => {
   const [activeMenuItem, setActiveMenuItem] = useState(null);
 
   const handleMenuHover = (menuItem) => {
@@ -22,7 +24,16 @@ const SideBar = () => {
       <CDBSidebar textColor="#fff" backgroundColor="#333">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
-            Welcome aboard
+            
+            {user ? ( 
+            <div style={{color:'white', fontSize:'18px', fontWeight:'500'}}>
+              Welcome {user.name}
+            </div>
+          ): 
+          <div>
+       Welcome aboard
+          </div>
+          }
           </a>
         </CDBSidebarHeader>
 
@@ -70,6 +81,34 @@ const SideBar = () => {
                 Team
               </CDBSidebarMenuItem>
             </NavLink>
+            <NavLink
+              exact
+              to="/enterDetail"
+              activeClassName="activeClicked"
+              onMouseEnter={() => handleMenuHover('loginPage')}
+              onMouseLeave={() => handleMenuHover(null)}
+            >
+              <CDBSidebarMenuItem
+                className={activeMenuItem === 'loginPage' ? 'active-menu' : ''}
+                icon="columns"
+              >
+                Login Page
+              </CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink
+              exact
+              to="/newUsers"
+              activeClassName="activeClicked"
+              onMouseEnter={() => handleMenuHover('newUsers')}
+              onMouseLeave={() => handleMenuHover(null)}
+            >
+              <CDBSidebarMenuItem
+                className={activeMenuItem === 'newUsers' ? 'active-menu' : ''}
+                icon="columns"
+              >
+                New Users
+              </CDBSidebarMenuItem>
+            </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
@@ -81,4 +120,11 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+// export default SideBar;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(SideBar);

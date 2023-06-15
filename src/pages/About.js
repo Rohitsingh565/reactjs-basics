@@ -1,7 +1,27 @@
-import React from 'react'
+import {React, useState, useEffect} from 'react'
 import Sidebar from '../components/SideBar'
 import NavigationBar from '../components/NavigationBar'
+import axios from 'axios';
+import AxiosCard from '../components/AxiosCard';
+
 const About = () => {
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
+      setData(response.data);
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
+
+
   return (
     <div>
       <div style={{display:"flex" }}>
@@ -17,7 +37,7 @@ const About = () => {
 <div style={{fontSize:'28px', color:'white', fontWeight:'700' , marginTop:"115px", marginLeft:'100px'}}>
        Who are we
       </div>
-        <div style={{fontSize:'25px', color:'white', fontWeight:'500' , marginTop:"55px", marginLeft:'100px', marginBottom:'248px'}}>
+        <div style={{fontSize:'25px', color:'white', fontWeight:'500' , marginTop:"55px", marginLeft:'100px', marginBottom:'67px'}}>
         At-scale credit marketplace for digital lending
         <br/>
 In-house end-to-end digital lending infrastructure
@@ -50,6 +70,15 @@ Provides advanced analytics-based risk management services such
 as application scorecards, early warning systems etc
 
 
+        </div>
+        <div style={{fontSize:'20px', color:'white', fontWeight:'700' , marginTop:"115px", marginLeft:'100px', color:'blue'}}>
+          Data fetched from mock api
+        </div>
+        <div>
+        {data.map((item) => (
+          <AxiosCard title={item.title.substring(0,30)} id={item.id} />
+          // <li key={item.id}>{item.title}</li>
+        ))}
         </div>
       </div>
     </div>
